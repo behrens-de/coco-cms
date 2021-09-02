@@ -2,7 +2,7 @@
 $pages = <<< JSON
 [{
     "name": "Home",
-    "url": "",
+    "url": "/",
     "parent-url": null,
     "page":null,
     "header": null,
