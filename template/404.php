@@ -12,6 +12,6 @@
 <body>
     <h1>404 Error</h1>
     <?php print_r(http_response_code());?>
-    <a href="index.php">Gehe zur Startseite</a>
+    <a href="/core/">Gehe zur Startseite</a>
 </body>
 </html>

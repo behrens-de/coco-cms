@@ -2,19 +2,24 @@
 session_start();
 $SID = session_id();
 
-require(__DIR__.'/Page.php'); // PAGE CLASS
-require(__DIR__.'/Menu.php'); // PAGE CLASS
+require(__DIR__ . '/Page.php'); // PAGE CLASS
+require(__DIR__ . '/Menu.php'); // PAGE CLASS
 
 $cocopage = new Page();
 $cocodata = $cocopage->data();
 //------------------------------------
-$cocomenu = new Menu($cocopage->pages);
-
+$cocomenu = new Menu($cocopage->pages, $cocopage->uri);
+//------------------------------------
+if (!$cocopage->isPage()) {
+    header("HTTP/1.0 404 Not Found");
+}
 
 // TEMPLATE INFORMATION
+// TODO: Prüfen ob das gewählte template auch vorhanden ist
 define('TEMPLATE', ($cocodata->template ? $cocodata->template : 'default'));
 define('TEMPLATE_ERROR', '404');
-define('TEMPLATE_PATH', __DIR__.'/../template/');
+define('TEMPLATE_PATH', __DIR__ . '/../template/');
+
 
 echo '
 <!DOCTYPE html>
@@ -24,7 +29,23 @@ echo '
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="La LA LA">
-    <title>'.$cocodata->title.'</title>
+    <title>' . $cocodata->title . '</title>
+
+    <style>
+    body{color: #444;}
+    li{padding: 5px;}
+    .active{
+        background: green;
+    }
+    a{
+        text-decoration: none;
+        color: green;
+    }
+    .active a{
+        color: #fff;
+    }
+    </style>
+
 </head>
 <body>
 ';
@@ -50,11 +71,9 @@ echo '
 // print $cocodata->name;
 
 
+
 $templateFile =  $cocopage->isPage() ? TEMPLATE : TEMPLATE_ERROR;
-
-print $templateFile;
-
-include(TEMPLATE_PATH.$templateFile.'.php');
+include(TEMPLATE_PATH . $templateFile . '.php');
 
 // if($match === null){
 // echo "error";

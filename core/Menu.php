@@ -1,22 +1,24 @@
 <?
 class Menu{
-    function __construct($pages)
+    function __construct($pages, $uri)
     {
         $this->pages = $pages;
+        $this->uri = $uri;
     }
 
     function render($prefix)
     {
         $menu = '<ul>';
         foreach ($this->pages as $page) {
+
+            $uri_without_prefix = str_replace($prefix,'',$this->uri);
     
             $name = $page->name;
             $url = $page->route;
-            $active = $_GET['page'] == $url ? 'active' : 'notActive';
-    
+            $active = $uri_without_prefix == $url ? 'active' : '';
             $url = strlen($url) > 0 ? $prefix. $url : '/';
     
-            $menu .= '<li><a href="' . $url . '">' . $name . ' - ' . $active . '<a/></li>';
+            $menu .= '<li class="' . $active . '"><a href="' . $url . '">' . $name . '</a></li>';
         }
     
         return $menu . '</ul>';
