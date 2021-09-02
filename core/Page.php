@@ -36,10 +36,13 @@ class Page
         $data = [];
         foreach ($this->pages as $page) {
             if ($page->route === $this->uri()) {
-                $data["hallo"] = "Hallo";
+                $data = $page;
                 break;
             }
         }
         return $data;
     }
+
+
+
 }

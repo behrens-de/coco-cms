@@ -1,10 +1,29 @@
 [{
     "id":1,
     "route":"/",
-    "name":"Startseite"
+    "title":"---Willkommen auf der Startseite",
+    "name":"Startseite",
+    "template": "home"
 },
 {
     "id":2,
     "route":"/demo",
+    "title":"Dies ist eine Demoseite",
+    "template": "demo",
     "name":"Demo"
-}]
+},
+{
+    "id":3,
+    "route":"/impressum",
+    "title":"Jetzt wird es rechtlich",
+    "template": "impressum",
+    "name":"Impressum"
+},
+{
+    "id":3,
+    "route":"/bla-bla",
+    "title":"Nur gelaber",
+    "name":"Bla Bla"
+}
+
+]
