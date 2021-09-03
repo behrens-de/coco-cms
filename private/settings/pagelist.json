@@ -9,14 +9,12 @@
     "id":2,
     "route":"/demo",
     "title":"Dies ist eine Demoseite",
-    "template": "demo",
     "name":"Demo"
 },
 {
     "id":3,
     "route":"/impressum",
     "title":"Jetzt wird es rechtlich",
-    "template": "impressum",
     "name":"Impressum"
 },
 {

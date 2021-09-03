@@ -5,6 +5,9 @@ class Page
     {
         $this->prefix = $prefix;
         $this->pages = json_decode(file_get_contents(__DIR__ . '/../private/settings/pagelist.json', true));
+        
+        $this->domain = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];  
+
         $lastSlash = $_SERVER['REQUEST_URI'][strlen($_SERVER['REQUEST_URI']) - 1];
         $lastSlash === '/' ? true : false;
         $this->uri = $lastSlash ? rtrim($_SERVER['REQUEST_URI'], "/") : $_SERVER['REQUEST_URI'];

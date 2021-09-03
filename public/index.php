@@ -13,9 +13,9 @@ define('PREFIX', '/public');
 $cocopage = new Page(PREFIX);
 $cocodata = $cocopage->data();
 $cocomenu = new Menu($cocopage->pages, $cocopage->uri());
-$cocoheader = new Header($cocodata, $cocopage->isPage());
+$cocoheader = new Header($cocodata, $cocopage->isPage(), $cocopage->domain, PREFIX);
 
-echo $cocoheader->load();
+print $cocoheader->load();
 
 // TEMPLATE INFORMATION
 // TODO: Prüfen ob das gewählte template auch vorhanden ist
@@ -29,7 +29,11 @@ define('TEMPLATE_PATH', __DIR__ . '/../template/'.TEMPLATENAME.'/');
 // $lastSlash === '/' ? true: false;
 // $cocopage->uri = $lastSlash ? rtrim($cocopage->uri, "/"):$cocopage->uri;
 
-echo $cocopage->uri;
+ 
+// echo $cocopage->domain;
+// echo $cocopage->uri;
+$css = $cocopage->domain.PREFIX.'/src/css/main.css';
+//
 
 $templateFile =  $cocopage->isPage() ? TEMPLATE : TEMPLATE_ERROR;
 include(TEMPLATE_PATH . $templateFile . '.php');

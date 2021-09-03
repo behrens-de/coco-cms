@@ -6,9 +6,10 @@ class Menu{
         $this->uri = $uri;
     }
 
-    function render($prefix)
+    function render($prefix, $class = null)
     {
-        $menu = '<ul>';
+        $class = $class !== null ? ' class="'.$class.'"': '';
+        $menu = '<nav'.$class.'><ul>';
         foreach ($this->pages as $page) {
 
             $uri_without_prefix = str_replace($prefix,'',$this->uri);
@@ -21,7 +22,7 @@ class Menu{
             $menu .= '<li class="' . $active . '"><a href="' . $url . '">' . $name . '</a></li>';
         }
     
-        return $menu . '</ul>';
+        return $menu . '</ul></nav>';
     }   
 
 

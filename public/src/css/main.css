@@ -1,0 +1,60 @@
+@import url(./normalize.css);
+:root {
+    --primery-color: rgb(255, 87, 87);
+    --primery-color-dark: rgb(176, 57, 57);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.coco-nav {
+    width: 100%;
+    display: block;
+    background: var(--primery-color);
+}
+
+.coco-nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.coco-nav ul, .coco-nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+.coco-nav ul li {
+    list-style: none;
+}
+
+.coco-nav ul li a {
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    color: #fff;
+    text-shadow: 1px 1px 1px var(--primery-color-dark);
+
+
+}
+
+.coco-nav ul li a:hover {
+    text-shadow: none;
+    color: var(--primery-color-dark);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, 0.15) 38%, rgba(255, 255, 255, 0.1) 62%, rgba(255, 255, 255, 0) 90%);
+    transition: all linear .4s;
+}
+
+.coco-nav ul li.active a {
+    border-bottom: 2px solid var(--primery-color-dark);
+}
+
+/*
+--- LOGO
+*/
+
+.coco-logo {
+    height: 60px;
+    max-width: 90%;
+}
