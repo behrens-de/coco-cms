@@ -1,17 +1,21 @@
 <?
 class Page
 {
-    function __construct()
+    function __construct($prefix)
     {
-        $this->pages = json_decode(file_get_contents(__DIR__.'/../private/settings/pagelist.json', true)); 
-        $this->uri = $_SERVER['REQUEST_URI'];
+        $this->prefix = $prefix;
+        $this->pages = json_decode(file_get_contents(__DIR__ . '/../private/settings/pagelist.json', true));
+        $lastSlash = $_SERVER['REQUEST_URI'][strlen($_SERVER['REQUEST_URI']) - 1];
+        $lastSlash === '/' ? true : false;
+        $this->uri = $lastSlash ? rtrim($_SERVER['REQUEST_URI'], "/") : $_SERVER['REQUEST_URI'];
     }
 
     // #1: Check die URL 
     // TODO: Entferne den letzen Backslash des $uri Strings
+    // DONE: JPBEHRENS 2021-09-03
     public function uri()
     {
-        $uri = str_replace("/public", "/", $this->uri);
+        $uri = str_replace($this->prefix, "/", $this->uri);
         $uri = str_replace("//", "/", $uri);
         return $uri;
     }

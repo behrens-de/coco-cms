@@ -9,11 +9,10 @@ spl_autoload_register(function ($name) {
 // definiert den Server prefix zb. https://expamle.de{/prefix}/beispiel/
 define('PREFIX', '/public');
 
-
 //---------------------------
-$cocopage = new Page();
+$cocopage = new Page(PREFIX);
 $cocodata = $cocopage->data();
-$cocomenu = new Menu($cocopage->pages, $cocopage->uri);
+$cocomenu = new Menu($cocopage->pages, $cocopage->uri());
 $cocoheader = new Header($cocodata, $cocopage->isPage());
 
 echo $cocoheader->load();
@@ -24,6 +23,13 @@ define('TEMPLATE', ($cocodata->template ? $cocodata->template : 'default'));
 define('TEMPLATENAME', 'coco-one');
 define('TEMPLATE_ERROR', '404');
 define('TEMPLATE_PATH', __DIR__ . '/../template/'.TEMPLATENAME.'/');
+
+
+// $lastSlash = $cocopage->uri[strlen($cocopage->uri) - 1];
+// $lastSlash === '/' ? true: false;
+// $cocopage->uri = $lastSlash ? rtrim($cocopage->uri, "/"):$cocopage->uri;
+
+echo $cocopage->uri;
 
 $templateFile =  $cocopage->isPage() ? TEMPLATE : TEMPLATE_ERROR;
 include(TEMPLATE_PATH . $templateFile . '.php');
