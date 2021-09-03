@@ -1,7 +1,6 @@
 <?
 class Page
 {
-
     function __construct()
     {
         $this->pages = json_decode(file_get_contents(__DIR__.'/../private/settings/pagelist.json', true)); 
@@ -12,7 +11,7 @@ class Page
     // TODO: Entferne den letzen Backslash des $uri Strings
     public function uri()
     {
-        $uri = str_replace("/core", "/", $this->uri);
+        $uri = str_replace("/public", "/", $this->uri);
         $uri = str_replace("//", "/", $uri);
         return $uri;
     }
@@ -42,7 +41,4 @@ class Page
         }
         return $data;
     }
-
-
-
 }

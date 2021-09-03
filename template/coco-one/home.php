@@ -1,6 +1,6 @@
-<h1>Home</h1>
+<h1>Coco One :)</h1>
 <?php print_r(http_response_code());?>
 <?php var_dump($cocodata)?>
-<? echo $cocomenu->render('/core'); ?>
+<? echo $cocomenu->render(PREFIX); ?>
 </body>
 </html>

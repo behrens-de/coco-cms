@@ -1,37 +1,29 @@
 <?php
 session_start();
-$sid = session_id();
-require(__DIR__.'/../private/settings.php');
-// Wenn seite nicht in _metas mit aufgeführt ist 
-if (!$isPage) {
-    header("HTTP/1.0 404 Not Found");
-    require_once(__DIR__.'/../template/404.php');
-    die();
-}
-?>
+$SID = session_id();
+//---------------------------
+spl_autoload_register(function ($name) {
+    require(__DIR__ . '/../core/' . $name . '.php');
+});
 
-<? include(__DIR__.'/../template/'.$page['template'].'.php'); ?>
-<body>
+// definiert den Server prefix zb. https://expamle.de{/prefix}/beispiel/
+define('PREFIX', '/public');
 
 
-    <?
+//---------------------------
+$cocopage = new Page();
+$cocodata = $cocopage->data();
+$cocomenu = new Menu($cocopage->pages, $cocopage->uri);
+$cocoheader = new Header($cocodata, $cocopage->isPage());
 
-print $sid;
-?>
-<h3><? var_dump($isPage); ?></h3>
-<?
-print_r(http_response_code());
-    // echo mainMenu($meta);
+echo $cocoheader->load();
 
-    var_dump(pageData($pages));
-   // require_once('./page.php');
+// TEMPLATE INFORMATION
+// TODO: Prüfen ob das gewählte template auch vorhanden ist
+define('TEMPLATE', ($cocodata->template ? $cocodata->template : 'default'));
+define('TEMPLATENAME', 'coco-one');
+define('TEMPLATE_ERROR', '404');
+define('TEMPLATE_PATH', __DIR__ . '/../template/'.TEMPLATENAME.'/');
 
-
-
-   var_dump(isset($_GET['page']));
-    ?>
-
-
-</body>
-
-</html>
+$templateFile =  $cocopage->isPage() ? TEMPLATE : TEMPLATE_ERROR;
+include(TEMPLATE_PATH . $templateFile . '.php');
