@@ -1,0 +1,66 @@
+@import url('./../../src/css/main.css');
+body {
+    background: var(--primery-color);
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 100vw;
+    height: 100vh;
+    min-height: calc(100vh - 50px);
+}
+
+div:nth-child(1) {
+    flex-grow: 1;
+    display: flex;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
+
+div:nth-child(3) {
+    flex-grow: 1;
+    display: flex;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+.copy {
+    float: right;
+    background: rgba(0, 0, 0, .2);
+}
+
+div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 400px;
+    flex-grow: 2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.coco-login{
+    width: 400px;
+    border: 1px solid #fff;
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, .1);
+}
+.coco-login input{
+    width: calc(100% - 20px);
+    border: none;
+    line-height: 30px;
+    background:  rgba(0, 0, 0, .1);
+    border: 1px solid rgba(255,255,255,.5);
+    outline: none;
+    margin: 10px;
+}
+
+.coco-login button{
+    outline: none;
+    border: none;
+    width: calc(100% - 20px);
+    margin: 10px;
+    line-height: 30px;
+}

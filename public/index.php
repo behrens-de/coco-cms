@@ -35,5 +35,7 @@ define('TEMPLATE_PATH', __DIR__ . '/../template/'.TEMPLATENAME.'/');
 $css = $cocopage->domain.PREFIX.'/src/css/main.css';
 //
 
+var_dump($_SESSION);
+
 $templateFile =  $cocopage->isPage() ? TEMPLATE : TEMPLATE_ERROR;
 include(TEMPLATE_PATH . $templateFile . '.php');
