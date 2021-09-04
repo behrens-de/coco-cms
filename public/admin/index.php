@@ -1,73 +1,75 @@
 <?
+// COCO CMS Copyright by JP Behrens <https://jpbehrens.de> 
 session_start();
 $SID = session_id();
-
 spl_autoload_register(function ($name) {
     require(__DIR__ . '/../../core/' . $name . '.php');
 });
+
+
+# 1. Prüfen ob es schon Anmeldedaten gibt 
+
+
+/* # 2. Prüfen ob nutzer Angemeldet ist 
+ * 
+ * # 3. Anzeigen des richtigen Interface
+ * 
+ * // Interfaces
+ * - 1. Regestrieren 
+ * - 2. Login Formular
+ * - 3. Dashboard
+ * 
+ * // Fragen 
+ * - was passiert wen der Nutzer sein Passwort vergisst? 
+ * - wie kann man seine Logindaten ändern
+ */
 
 $page = new Page();
 $admin = new Admin();
 $adminUri = $page->adminUri(); // the UIT after {DOMAIN}/public/admin
 
-print '<h1>'.$adminUri.'</h1>';
-# 1 - First Run
 $settingFile = __DIR__ . '/../../private/settings/settings.json';
-$fileExist = file_exists($settingFile);
 
-if (!$fileExist) {
-    // Create a setting JSON File
-    $isCreated = false;
+// Wenn firstrun noch nicht ausgeführt wurde
+if (!$admin::checkFirstRun($settingFile)) {
+    echo Admin::html_render(__DIR__ . '/parts/form_first_run.html', 'Daten Anlegen');
 
-    if (isset($_POST)) {
-        $isCreated = $admin::firstRun($settingFile, $_POST);
+    if ($_POST) {
+        $firstrun =  $admin::firstRun($settingFile, $_POST);
+        if (!$firstrun) {
+            print 'Ein Fehler ist aufgetreten';
+        } else {
+            echo '<h2>Sie werden gleich weitergeleitet</h2>';
+            print Page::reload();
+        }
     }
+    die();
+}
 
-    if ($isCreated) {
-        echo 'Dein Master-Admin Account wurde erstellt<br>
-        Du wirst gleich weiter geleitet!';
-        // JAVASCRIPT WEITERLEITUNG NACH 2,5 SEKUNDEN
-        echo '
-        <script>
-        setTimeout(function(){
-            window.location.reload(1);
-         }, 2500);
-        </script>
-        ';
-    } else {
+// Prüffen ob Eingelogt sonst zeige Anmelde formular
+if (!$_SESSION['loggedin']) {
 
-?>
-<h2>Regestrieren Sie sich bitte :)</h2>
-        <form action="" method="post">
-            <label for="">Benutzername</label>
-            <input type="text" name="name" id="">
-            <label for="">Passwort</label>
-            <input type="password" name="password" id="">
-            <label for="">Passwort wiederholen</label>
-            <input type="password" name="password2" id="">
-            <button>Button</button>
-        </form>
-    <?
+    echo Admin::html_render(__DIR__ . '/parts/form_login.html','Anmelden');
+    if ($_POST) {
+        $isLogIn = $admin::checkLogin($_POST) ? true : false;
+        if ($isLogIn) {
+            echo 'Login erfolgreich Sie werden gleich weiter geleitet';
+            $_SESSION['loggedin'] = true;
+            print Page::reload();
+
+        } else {
+            $_SESSION['loggedin'] = false;
+            echo 'Fehler beim Anmelden';
+        }
     }
-    // Create a setting JSON File
-} else {
-    // Show Login
-    print '// Show Login';
-    ?>
-    <form action="" method="post">
-        <label for="">Benutzername</label>
-        <input type="text" name="name" id="">
-        <label for="">Passwort</label>
-        <input type="password" name="password" id="">
-        <button>Button</button>
-    </form>
-<?
-if($admin::checkLogin($_POST)){
-    echo 'Login erfolgreich';
-    
-} else {
-    echo 'Login FALSCH';   
+    die();
 }
- 
-}
+
+
+echo 'Willkommen im Admin Bereich<hr>';
+var_dump($_SESSION);
+
+
+
+// 
 // TESTED ON PHP.VERSION => 7.3.24

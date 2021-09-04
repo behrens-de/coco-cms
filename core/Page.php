@@ -50,4 +50,12 @@ class Page
         }
         return $data;
     }
+
+    # 4: Reload the Page
+    static function reload(int $time = 1000)
+    {
+        return '<script>
+        setTimeout(function(){window.location.reload(1);}, '.$time.');
+        </script>';
+    }
 }
