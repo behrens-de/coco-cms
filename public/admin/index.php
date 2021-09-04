@@ -29,7 +29,33 @@ $admin = new Admin();
 $adminUri = $page->adminUri(); // the UIT after {DOMAIN}/public/admin
 
 
+
 $settingFile = __DIR__ . '/../../private/settings/settings.json';
+
+// API
+if($adminUri === 'logincheck'){
+
+    $_POST = json_decode(file_get_contents('php://input'), true);
+
+
+    $data["name"] =  $_POST['name'];
+    $data["password"] =  $_POST['password'];
+    $data["status"] = false;
+
+    $logincheck = $admin::checkLogin($_POST) ? true : false;
+    if($logincheck){
+        $data['msg'] =  'Du hast dich erfolgreich angemeldet';
+        $data["status"] = true;
+    } else {
+        $data['msg'] =  'Ein fehler ist aufgetreten';
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data);
+    die();
+}
+
+
 
 // Wenn firstrun noch nicht ausgeführt wurde
 if (!$admin::checkFirstRun($settingFile)) {
@@ -68,9 +94,13 @@ if (!$_SESSION['loggedin']) {
 
 
 echo 'Willkommen im Admin Bereich<hr>';
+echo $adminUri;
+echo '<hr>';
 var_dump($_SESSION);
 
 
+
+session_destroy();
 
 // 
 // TESTED ON PHP.VERSION => 7.3.24

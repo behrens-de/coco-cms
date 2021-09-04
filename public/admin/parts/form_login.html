@@ -1,10 +1,55 @@
 <div class="wrap">
     <h2>Melde dich an!</h2>
-    <form action="" method="post">
+    <form action="" method="post" class="login-form">
         <label for="">Benutzername</label>
-        <input type="text" name="name" id="">
+        <input type="text" name="name">
         <label for="">Passwort</label>
-        <input type="password" name="password" id="">
+        <input type="password" name="password">
         <button>Button</button>
     </form>
+    <div class="infobox"></div>
 </div>
+
+<script>
+
+    const form = document.querySelector('.login-form');
+    const info = document.querySelector('.infobox');
+    form.addEventListener('submit', checkLogin);
+
+    function checkLogin(e) {
+        info.innerHTML = 'bitte warten';
+        e.preventDefault();
+
+
+
+        let data = {
+            name: "coco",
+            password: "coco1234"
+        };
+
+        fetch('http://localhost:3333/public/admin/logincheck', {
+
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json().then(data => ({ status: res.status, body: data })))
+            .then(obj => {
+                info.innerHTML = obj.body.msg;
+                if (obj.body.status) {
+                    console.log('Du wirst weiter geleitet');
+                }
+                console.log(obj)
+            })
+            .catch(function (err) {
+                console.log(err) // this won't trigger because there is no actual error
+            });
+
+    }
+
+
+
+</script>
