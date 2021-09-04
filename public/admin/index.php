@@ -28,6 +28,7 @@ $page = new Page();
 $admin = new Admin();
 $adminUri = $page->adminUri(); // the UIT after {DOMAIN}/public/admin
 
+
 $settingFile = __DIR__ . '/../../private/settings/settings.json';
 
 // Wenn firstrun noch nicht ausgeführt wurde
