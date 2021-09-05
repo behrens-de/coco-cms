@@ -5,10 +5,14 @@ class Admin
     static function firstRun($path, $post)
     {
 
-        $isCorrect = $post["password"] === $post["password2"] && (strlen($post["name"]) > 2 && strlen($post["password2"]) > 7) ? true : false;
+        $isCorrect = $post["password"] === $post["password2"] && (strlen($post["name"]) > 2 && strlen($post["password2"]) > 7
+        && filter_var($post["email"], FILTER_VALIDATE_EMAIL)
+        ) ? true : false;
         $hash = password_hash($post["name"] . $post["password"], PASSWORD_DEFAULT);
 
         if ($isCorrect) {
+            $data['admin']["email"] = $post["email"];
+            $data['admin']["name"] = $post["name"];
             $data['admin']["hash"] = $hash;
             $file = fopen($path, 'w');
             fwrite($file, json_encode($data));
@@ -33,6 +37,8 @@ class Admin
 
     static function html_head(string $title)
     {
+        
+        $here = new Page();
         return '
         <!DOCTYPE html>
         <html lang="de">
@@ -41,6 +47,7 @@ class Admin
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $title . '</title>
+            <link rel="stylesheet" href="'.$here->uri().'/src/style.css">
         </head>
         <body>
         ';

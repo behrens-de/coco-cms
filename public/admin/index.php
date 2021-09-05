@@ -62,20 +62,24 @@ if($adminUri === 'logout'){
     $_SESSION['loggedin'] = false;
 }
 
+if($adminUri === 'firstrun'){
+    $_POST = json_decode(file_get_contents('php://input'), true);
+
+    $data["name"] =  $_POST['name'];
+    $data["password"] =  $_POST['password'];
+    $data["check"] = $admin::firstRun($settingFile, $_POST);
+    $data["msg"] = "Sie werden gleich zum Anmeldebereich weiter geleitet";
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data);
+    $_SESSION['loggedin'] = false;
+    die();
+}
+
 
 // Wenn firstrun noch nicht ausgeführt wurde
 if (!$admin::checkFirstRun($settingFile)) {
     echo Admin::html_render(__DIR__ . '/parts/form_first_run.html', 'Daten Anlegen');
-
-    if ($_POST) {
-        $firstrun =  $admin::firstRun($settingFile, $_POST);
-        if (!$firstrun) {
-            print 'Ein Fehler ist aufgetreten';
-        } else {
-            echo '<h2>Sie werden gleich weitergeleitet</h2>';
-            print Page::reload();
-        }
-    }
     die();
 }
 

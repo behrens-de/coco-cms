@@ -1,66 +1,91 @@
 @import url('./../../src/css/main.css');
 body {
-    background: var(--primery-color);
+    background: #ddd;
 }
 
-.page {
+
+
+.coco-admin-wrap{
+    width: 100%;
+    flex-direction: column;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: stretch;
-    width: 100vw;
-    height: 100vh;
-    min-height: calc(100vh - 50px);
+    align-items: center;
+    justify-content: center;
 }
 
-div:nth-child(1) {
-    flex-grow: 1;
-    display: flex;
-    align-self: flex-start;
-    justify-self: flex-start;
+.coco-admin-wrap img{
+    max-width: 300px;
+    margin: 25px 0 5px 0;
+    filter: grayscale(1);
+    opacity: .4;
 }
 
-div:nth-child(3) {
-    flex-grow: 1;
-    display: flex;
-    align-self: flex-end;
-    justify-self: flex-end;
-}
 
-.copy {
-    float: right;
-    background: rgba(0, 0, 0, .2);
+.coco-admin-wrap h1{
+    font-weight: 100;
+    font-size: 1.65rem;
+    color: rgba(0, 0, 0, .5);
+    margin: 20px 0;
 }
+/*
+coco-admin-form
+*/
 
-div:nth-child(2) {
+.coco-admin-form {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
     width: 400px;
-    flex-grow: 2;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    max-width: 90%;
+    background: #fff;
+    padding: 20px;
+    padding-bottom: 0px;
 }
 
-.coco-login{
-    width: 400px;
-    border: 1px solid #fff;
-    box-shadow: 10px 10px 0px rgba(0, 0, 0, .1);
+.coco-admin-form label{
+    display: block;
+    color: #777;
+    font-size: 90%;
+    padding: 5px 0;
 }
-.coco-login input{
-    width: calc(100% - 20px);
+.coco-admin-form input{
+    display: block;
+    width: 100%;
     border: none;
-    line-height: 30px;
-    background:  rgba(0, 0, 0, .1);
-    border: 1px solid rgba(255,255,255,.5);
     outline: none;
-    margin: 10px;
+    background: rgba(0, 0, 0, .05);
+    line-height: 36px;
+    margin-bottom: 10px;
+    padding: 0 12px;
 }
 
-.coco-login button{
-    outline: none;
+.coco-admin-form button{
+    padding: 12px 20px;
+    width: 100%;
     border: none;
-    width: calc(100% - 20px);
-    margin: 10px;
-    line-height: 30px;
+    outline: none;
+    background: rgba(0, 0, 0, .5);
+    border-bottom: 4px solid rgba(0, 0, 0, .25);
+    color: #fff;
+    margin: 10px 0 0px 0;
+}
+.coco-admin-form button:active{
+    margin: 13px 0 0px 0;  
+    border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.coco-admin-infobox{
+    padding: 10px;
+    width: 100%;
+}
+
+.infobox-error{
+    margin: 20px 0;
+    background: rgb(251, 186, 186);
+    color: rgb(186, 70, 70);
+}
+
+.infobox-success{
+    margin: 0 0 20px 0;
+    background: rgb(202, 251, 186);
+    color: rgb(22, 103, 38);
 }

@@ -1,13 +1,17 @@
-<div class="wrap">
-    <h2>Melde dich an!</h2>
-    <form action="" method="post" class="login-form">
-        <label for="">Benutzername</label>
-        <input type="text" name="name">
-        <label for="">Passwort</label>
-        <input type="password" name="password">
-        <button>Button</button>
-    </form>
-    <div class="infobox"></div>
+<div class="coco-admin-page">
+    <div class="coco-admin-wrap">
+        <img src="../img/base/coco-cms-logo.png">
+        <form action="" method="post" class="coco-admin-form first-run">
+            <div class="inputs">
+                <label for="">Benutzername</label>
+                <input type="text" name="name">
+                <label for="">Passwort</label>
+                <input type="password" name="password">
+                <button type="submit">Button</button>
+            </div>
+            <div class="coco-admin-infobox"></div>
+        </form>
+    </div>
 </div>
 
 <script>
@@ -35,11 +39,11 @@
         })
             .then(res => res.json().then(data => ({ status: res.status, body: data })))
             .then(obj => {
-                
+
                 if (obj.body.status) {
 
                     info.innerHTML = obj.body.msg;
-                    window.setTimeout(function(){location.reload()},2000)
+                    window.setTimeout(function () { location.reload() }, 2000)
                 }
                 console.log(obj)
             })

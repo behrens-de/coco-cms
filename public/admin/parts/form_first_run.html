@@ -1,12 +1,83 @@
-<div class="wrap">
-    <h2>Regestrieren Sie sich bitte :)</h2>
-    <form action="" method="post">
-        <label for="">Benutzername</label>
-        <input type="text" name="name">
-        <label for="">Passwort</label>
-        <input type="password" name="password">
-        <label for="">Passwort wiederholen</label>
-        <input type="password" name="password2">
-        <button>Button</button>
-    </form>
+<div class="coco-admin-page">
+    <div class="coco-admin-wrap">
+        <img src="../img/base/coco-cms-logo.png">
+        <h1>Erstelle deinen Admin-Account</h1>
+        <form autocomplete="off" method="post" class="coco-admin-form first-run">
+            <div class="inputs">
+                <label for="">Benutzername</label>
+                <input type="text" name="name">
+                <label for="">E-Mail</label>
+                <input type="email" name="email">
+                <label for="">Passwort</label>
+                <input type="password" name="password">
+                <label for="">Passwort wiederholen</label>
+                <input type="password" name="password2">
+                <button type="submit">Super-Admin erstellen</button>
+            </div>
+            <div class="coco-admin-infobox"></div>
+        </form>
+
+    </div>
 </div>
+
+
+<script>
+    adminFirstRun();
+    function adminFirstRun() {
+        const form = document.querySelector('.first-run');
+        const info = document.querySelector('.coco-admin-infobox');
+        form.addEventListener('submit', firstRun);
+
+        const fetchUri = 'http://localhost:3333/public/admin/firstrun';
+
+        function firstRun(e) {
+            e.preventDefault();
+            console.log('START - ADMIN - FIRST RUN');
+            const data = {
+                name: form.querySelector('input[name="name"]').value,
+                email: form.querySelector('input[name="email"]').value,
+                password: form.querySelector('input[name="password"]').value,
+                password2: form.querySelector('input[name="password2"]').value,
+            };
+
+            fetch(fetchUri, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json().then(data => ({ status: res.status, body: data })))
+                .then(obj => {
+                    // if (obj.body.status) {
+                    //     info.innerHTML = obj.body.msg;
+                    //     window.setTimeout(function () { location.reload() }, 2000)
+                    // }
+                    if (obj.body.check) {
+                        info.innerHTML = `Erfolgreich erstellt`;
+                        info.classList.add('infobox-success');
+                        document.querySelector('.inputs').remove();
+                        const txt = document.createElement('div')
+                        const innerTxt = document.createTextNode(obj.body.msg);
+                        txt.appendChild(innerTxt);
+                        info.after(txt);
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+
+                    } else {
+                        info.innerHTML = `Fehler gemacht`;
+                        info.classList.add('infobox-error');
+                        setTimeout(() => {
+                            info.innerHTML = ``;
+                            info.classList.remove('infobox-error');
+                        }, 1500);
+                    }
+                }).catch(function (err) {
+                    console.log(err)
+                });
+        }
+
+        //---
+    }
+
+</script>
