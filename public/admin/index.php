@@ -37,7 +37,6 @@ if($adminUri === 'logincheck'){
 
     $_POST = json_decode(file_get_contents('php://input'), true);
 
-
     $data["name"] =  $_POST['name'];
     $data["password"] =  $_POST['password'];
     $data["status"] = false;
@@ -46,8 +45,10 @@ if($adminUri === 'logincheck'){
     if($logincheck){
         $data['msg'] =  'Du hast dich erfolgreich angemeldet';
         $data["status"] = true;
+        $_SESSION['loggedin'] = true;
     } else {
         $data['msg'] =  'Ein fehler ist aufgetreten';
+        $_SESSION['loggedin'] = false;
     }
 
     header('Content-Type: application/json; charset=utf-8');
@@ -55,6 +56,11 @@ if($adminUri === 'logincheck'){
     die();
 }
 
+
+if($adminUri === 'logout'){
+    header('Content-Type: application/json; charset=utf-8');
+    $_SESSION['loggedin'] = false;
+}
 
 
 // Wenn firstrun noch nicht ausgeführt wurde
@@ -93,14 +99,10 @@ if (!$_SESSION['loggedin']) {
 }
 
 
-echo 'Willkommen im Admin Bereich<hr>';
-echo $adminUri;
-echo '<hr>';
-var_dump($_SESSION);
+
+echo Admin::html_render(__DIR__ . '/parts/dashboard.html', 'Admin Area');
 
 
-
-session_destroy();
 
 // 
 // TESTED ON PHP.VERSION => 7.3.24
