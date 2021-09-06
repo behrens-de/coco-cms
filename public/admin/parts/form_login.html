@@ -1,7 +1,7 @@
 <div class="coco-admin-page">
     <div class="coco-admin-wrap">
-        <img src="../img/base/coco-cms-logo.png">
-        <form action="" method="post" class="coco-admin-form first-run">
+        <img src="http://localhost:3333/public/img/base/coco-cms-logo.png">
+        <form action="" method="post" class="coco-admin-form check-login">
             <div class="inputs">
                 <label for="">Benutzername</label>
                 <input type="text" name="name">
@@ -11,12 +11,13 @@
             </div>
             <div class="coco-admin-infobox"></div>
         </form>
+        <a class="back-to-webpage" href="./../">← Zurück zur Webseite</a>
     </div>
 </div>
 
 <script>
-    const form = document.querySelector('.login-form');
-    const info = document.querySelector('.infobox');
+    const form = document.querySelector('.check-login');
+    const info = document.querySelector('.coco-admin-infobox');
     form.addEventListener('submit', checkLogin);
 
     function checkLogin(e) {
@@ -39,11 +40,22 @@
         })
             .then(res => res.json().then(data => ({ status: res.status, body: data })))
             .then(obj => {
-
+                info.innerHTML = obj.body.msg;
                 if (obj.body.status) {
-
-                    info.innerHTML = obj.body.msg;
-                    window.setTimeout(function () { location.reload() }, 2000)
+                    info.classList.add('infobox-success');
+                    document.querySelector('.inputs').remove();
+                    const txt = document.createElement('div');
+                    txt.classList.add('info-txt');
+                    const innerTxt = document.createTextNode(obj.body.msg2);
+                    txt.appendChild(innerTxt);
+                    info.after(txt);
+                    // window.setTimeout(function () { location.reload() }, 2000)
+                } else {
+                    info.classList.add('infobox-error');
+                    setTimeout(() => {
+                        info.innerHTML = ``;
+                        info.classList.remove('infobox-error');
+                    }, 1500);
                 }
                 console.log(obj)
             })

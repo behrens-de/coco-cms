@@ -1,0 +1,12 @@
+{
+    "first_run":{
+        "msg_success":"Erfolgreich Angemeldet",
+        "msg_success2": "Du hast dich erfolgreich angemeldet und wirst gleich zum Admin-Breich weiter geleitet",
+        "msg_error": "Ein Fehler ist aufgetreten"
+    },
+    "login":{
+        "msg_success":"Erfolgreich Angemeldet",
+        "msg_success2": "Du hast dich erfolgreich angemeldet und wirst gleich zum Admin-Breich weiter geleitet",
+        "msg_error": "Ein Fehler ist aufgetreten"
+    }
+}
