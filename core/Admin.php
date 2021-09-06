@@ -1,6 +1,6 @@
 <?
 class Admin
-{ 
+{
 
     function cocoKey($length = 25)
     {
@@ -23,7 +23,7 @@ class Admin
         if ($isCorrect) {
             $data['admin']["email"] = $post["email"];
             $data['admin']["name"] = $post["name"];
-            $data['admin']["id"] = $key; 
+            $data['admin']["id"] = $key;
             $data['admin']["hash"] = $hash;
             $file = fopen($path, 'w');
             fwrite($file, json_encode($data));
@@ -46,6 +46,10 @@ class Admin
         return password_verify($post["name"] . $post["password"], $admin->hash) ? true : false;
     }
 
+    static function data($path){
+        return json_decode(file_get_contents($path, true));
+    }    
+
     static function html_head(string $title)
     {
 
@@ -59,6 +63,7 @@ class Admin
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $title . '</title>
             <link rel="stylesheet" href="' . $here->uri() . '/src/style.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         </head>
         <body>
         ';
@@ -73,7 +78,28 @@ class Admin
     {
         $header = Admin::html_head($title);
         $contnet = file_get_contents($contnet, true);
+        // SET THE ADMIN NAME
+        $contnet = str_replace("{NAME}", ucfirst($_SESSION["admin"]["name"]), $contnet);
+        $contnet = str_replace("{GREETING}", Admin::greeting(), $contnet);
         $end = Admin::html_end();
         return $header . $contnet . $end;
     }
+
+
+    static function greeting(){
+        $Hour = date('H');
+  
+        if ( $Hour >= 5 && $Hour <= 11 ) {
+            $greeting =  "Guten Morgen ";
+        } else if ( $Hour >= 12 && $Hour <= 18 ) {
+            $greeting =  "Guten Tag ";
+        } else if ( $Hour >= 19 || $Hour <= 4 ) {
+            $greeting =  "Guten Abend ";
+        } else {
+            $greeting = 'Hallo';
+        }
+        return $greeting;
+    }
+
+
 }

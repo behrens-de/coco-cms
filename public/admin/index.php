@@ -52,6 +52,8 @@ if ($adminUri === 'logincheck') {
         $data['msg2'] =  $txtLogin->msg_success2;
         $data["status"] = true;
         $_SESSION['loggedin'] = true;
+        $adminData = $admin->data($settingFile);
+        $_SESSION["admin"] = array('name' => $adminData->admin->name, 'id' => $adminData->admin->id, 'email' => $adminData->admin->email);
         // SET ID FROM ADMIN 
     } else {
         $data['msg'] =  $txtLogin->msg_error;
@@ -120,6 +122,7 @@ if (!$_SESSION['loggedin']) {
 
 echo Admin::html_render(__DIR__ . '/parts/dashboard.html', 'Admin Area');
 
+//var_dump($_SESSION["admin"]);
 
 
 // 

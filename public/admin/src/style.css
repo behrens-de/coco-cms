@@ -107,3 +107,102 @@ a.back-to-webpage{
 a.back-to-webpage:hover{
     opacity: 1;
 }
+
+
+
+/* DASHBOARD */
+
+
+.coco-dashboard{
+    width: 100%;
+}
+.dashboard-header{
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+}
+
+.dashboard-logout{
+ width: 40px;
+ height: 40px;
+ background: #eee;
+ color: #555;
+ border-radius: 50%;
+ border: none;
+ text-align: center;
+ margin: 10px
+}
+
+.dashboard-logout:hover{
+
+    font-size: 110%;
+}
+
+.greeting{
+    line-height: 60px;
+    padding: 0 12px;
+}
+
+
+
+
+.coco-admin-page{
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+
+.coco-admin-nav{
+    background: #666;
+    width: 60px;
+    height: 100vh;
+    overflow: hidden;
+    transition: width .5s;
+}
+
+.coco-admin-nav:hover{
+    background: #666;
+    width: 300px;
+    height: 100vh;
+    overflow: hidden;
+}
+.coco-admin-nav-logo{
+    width: 60px;
+    height: 60px;
+}
+ul.coco-admin-nav-area{
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background: rgba(0, 0, 0, .25);
+    height: calc(100vh - 60px);
+}
+
+ul.coco-admin-nav-area li a{
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 1.15rem;
+    width: 100%;
+    text-decoration: none;
+}
+
+ul.coco-admin-nav-area li a:hover{
+    background: rgba(0, 0, 0, .25);
+}
+
+
+
+ul.coco-admin-nav-area li a .icon{
+    height: 40px; min-width: 60px;
+    line-height: 40px;
+    text-align: center;
+color: #fff;
+}
+ul.coco-admin-nav-area li a .label{
+    height: 40px; width: 100%;
+    line-height: 40px;
+    text-align: left;
+
+    color: #fff;
+}
+
