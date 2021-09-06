@@ -3,9 +3,7 @@ body {
     background: #ddd;
 }
 
-
-
-.coco-admin-wrap{
+.coco-admin-wrap {
     width: 100%;
     flex-direction: column;
     display: flex;
@@ -13,20 +11,20 @@ body {
     justify-content: center;
 }
 
-.coco-admin-wrap img{
+.coco-admin-wrap img {
     max-width: 300px;
     margin: 25px 0 5px 0;
     filter: grayscale(1);
     opacity: .4;
 }
 
-
-.coco-admin-wrap h1{
+.coco-admin-wrap h1 {
     font-weight: 100;
     font-size: 1.65rem;
     color: rgba(0, 0, 0, .5);
     margin: 20px 0;
 }
+
 /*
 coco-admin-form
 */
@@ -41,13 +39,14 @@ coco-admin-form
     padding-bottom: 0px;
 }
 
-.coco-admin-form label{
+.coco-admin-form label {
     display: block;
     color: #777;
     font-size: 90%;
     padding: 5px 0;
 }
-.coco-admin-form input{
+
+.coco-admin-form input {
     display: block;
     width: 100%;
     border: none;
@@ -58,7 +57,7 @@ coco-admin-form
     padding: 0 12px;
 }
 
-.coco-admin-form button{
+.coco-admin-form button {
     padding: 12px 20px;
     width: 100%;
     border: none;
@@ -68,91 +67,85 @@ coco-admin-form
     color: #fff;
     margin: 10px 0 0px 0;
 }
-.coco-admin-form button:active{
-    margin: 13px 0 0px 0;  
+
+.coco-admin-form button:active {
+    margin: 13px 0 0px 0;
     border-bottom: 1px solid rgba(0, 0, 0, .25);
 }
 
-.coco-admin-infobox{
+.coco-admin-infobox {
     padding: 10px;
     width: 100%;
 }
 
-.infobox-error{
+.infobox-error {
     margin: 20px 0;
     background: rgb(251, 186, 186);
     color: rgb(186, 70, 70);
 }
 
-.infobox-success{
+.infobox-success {
     margin: 0px 0 10px 0;
     background: rgb(202, 251, 186);
     color: rgb(22, 103, 38);
 }
 
-.info-txt{
+.info-txt {
     padding: 0 0 10px 0;
     font-size: 90%;
     color: #777;
 }
 
-
-a.back-to-webpage{
+a.back-to-webpage {
     margin-top: 15px;
     padding: 8px 16px;
     text-decoration: none;
     color: #000;
     opacity: .4;
 }
-a.back-to-webpage:hover{
+
+a.back-to-webpage:hover {
     opacity: 1;
 }
 
-
-
 /* DASHBOARD */
 
-
-.coco-dashboard{
+.coco-dashboard {
     width: 100%;
 }
-.dashboard-header{
+
+.dashboard-header {
     display: flex;
     justify-content: space-between;
     background: #fff;
 }
 
-.dashboard-logout{
- width: 40px;
- height: 40px;
- background: #eee;
- color: #555;
- border-radius: 50%;
- border: none;
- text-align: center;
- margin: 10px
+.dashboard-logout {
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    color: #555;
+    border-radius: 50%;
+    border: none;
+    text-align: center;
+    margin: 10px
 }
 
-.dashboard-logout:hover{
-
+.dashboard-logout:hover {
     font-size: 110%;
 }
 
-.greeting{
+.greeting {
     line-height: 60px;
     padding: 0 12px;
 }
 
-
-
-
-.coco-admin-page{
+.coco-admin-page {
     display: flex;
     flex-flow: row nowrap;
 }
 
-
-.coco-admin-nav{
+.coco-admin-nav {
     background: #666;
     width: 60px;
     height: 100vh;
@@ -160,17 +153,19 @@ a.back-to-webpage:hover{
     transition: width .5s;
 }
 
-.coco-admin-nav:hover{
+.coco-admin-nav:hover {
     background: #666;
     width: 300px;
     height: 100vh;
     overflow: hidden;
 }
-.coco-admin-nav-logo{
+
+.coco-admin-nav-logo {
     width: 60px;
     height: 60px;
 }
-ul.coco-admin-nav-area{
+
+ul.coco-admin-nav-area {
     margin: 0;
     padding: 0;
     width: 250px;
@@ -178,31 +173,90 @@ ul.coco-admin-nav-area{
     height: calc(100vh - 60px);
 }
 
-ul.coco-admin-nav-area li a{
+ul.coco-admin-nav-area li a {
     display: flex;
     flex-flow: row nowrap;
     font-size: 1.15rem;
     width: 100%;
     text-decoration: none;
+    transition: ease-out background-color .5s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-ul.coco-admin-nav-area li a:hover{
+ul.coco-admin-nav-area li a:hover {
     background: rgba(0, 0, 0, .25);
+    transform: scale(1.05);
+
+
 }
 
-
-
-ul.coco-admin-nav-area li a .icon{
-    height: 40px; min-width: 60px;
+ul.coco-admin-nav-area li a .icon {
+    height: 40px;
+    min-width: 60px;
     line-height: 40px;
     text-align: center;
-color: #fff;
-}
-ul.coco-admin-nav-area li a .label{
-    height: 40px; width: 100%;
-    line-height: 40px;
-    text-align: left;
-
     color: #fff;
 }
 
+ul.coco-admin-nav-area li a .label {
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    text-align: left;
+    color: rgba(251, 251, 251, 0.65);
+    font-weight: 100;
+}
+
+
+/* BREADCRUMB */
+
+ul.admin-breadcrumb, 
+ul.admin-breadcrumb li{
+    margin:0;
+    padding: 0;
+}
+
+ul.admin-breadcrumb{
+    width: calc(100% - 40px);
+    margin: 5px 20px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #999;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-items: center;
+    font-size: .75rem;
+    color: #777;
+}
+
+
+ul.admin-breadcrumb li{
+    list-style: none;
+}
+
+ul.admin-breadcrumb li:first-child{
+    padding-left: 10px;
+
+}
+ul.admin-breadcrumb li:last-child::after{
+    content: '';
+}
+
+ul.admin-breadcrumb li a{
+    text-decoration: none;
+    padding: 0px;
+    color: #777;
+}
+
+ul.admin-breadcrumb li::after{
+    content: '//';
+    padding: 5px;;
+    opacity: .25;
+}
+
+ul.admin-breadcrumb li:last-child a{
+    text-decoration: none;
+    padding: 0px;
+    color: #444;
+   
+}

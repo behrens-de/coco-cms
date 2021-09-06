@@ -2,6 +2,8 @@
 // COCO CMS Copyright by JP Behrens <https://jpbehrens.de> 
 session_start();
 $SID = session_id();
+#error_reporting(E_ERROR | E_PARSE | E_NOTICE);
+
 spl_autoload_register(function ($name) {
     require(__DIR__ . '/../../core/' . $name . '.php');
 });
@@ -119,8 +121,33 @@ if (!$_SESSION['loggedin']) {
 }
 
 
+$adminpage = explode('/', $page->uri);
+$adminpagecount = count($adminpage) - 1;
+$adminpage = $adminpage[$adminpagecount];
 
-echo Admin::html_render(__DIR__ . '/parts/dashboard.html', 'Admin Area');
+$adminpages = array(
+    "pages" => "dashboard-pages.html",
+    "menus"  => "dashboard-menus.html",
+    "settings" => "dashboard-settings.html",
+    "templates" => "dashboard-templates.html",
+    "data" => "dashboard-data.html",
+    "user" => "dashboard-user.html",
+    "newsletter" => "dashboard-newsletter.html"
+);
+
+if($adminpagecount > 2){
+    $adminPageLoad =  Admin::html_render(__DIR__ . '/parts/'.$adminpages[$adminpage], 'Admin Area');
+    if($adminPageLoad){
+        print $adminPageLoad;
+    } else {
+        echo 'Keinen zugrif auf diese Seite';
+    }
+
+} else{
+    echo Admin::html_render(__DIR__ . '/parts/dashboard.html', 'Admin Area');
+
+}
+// var_dump($adminpage, $adminpagecount);
 
 //var_dump($_SESSION["admin"]);
 

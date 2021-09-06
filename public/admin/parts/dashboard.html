@@ -2,58 +2,11 @@
 
 
 <div class="coco-admin-nav">
-    <div class="coco-admin-nav-logo"></div>
+    <div class="coco-admin-nav-logo">
+        coco cms
+    </div>
 
-<ul class="coco-admin-nav-area">
-    <li>
-        <a href="">
-            <div class="icon"><i class="far fa-file"></i></div>
-            <div class="label">Seiten</div>
-        </a>
-    </li>
-
-    <li>
-        <a href="">
-            <div class="icon"><i class="fas fa-list"></i></div>
-            <div class="label">Navigation</div>
-        </a>
-    </li>
-
-    <li>
-        <a href="">
-            <div class="icon"><i class="fas fa-user-cog"></i></div>
-            <div class="label">Einstellungen</div>
-        </a>
-    </li>   
- 
-    <li>
-        <a href="">
-            <div class="icon"><i class="fas fa-code"></i></div>
-            <div class="label">Templates</div>
-        </a>
-    </li>  
-
-    <li>
-        <a href="">
-            <div class="icon"><i class="far fa-folder"></i></div>
-            <div class="label">Datein</div>
-        </a>
-    </li> 
-    <li>
-        <a href="">
-            <div class="icon"><i class="fas fa-users"></i></div>
-            <div class="label">Benutzer</div>
-        </a>
-    </li> 
-    <li>
-        <a href="">
-            <div class="icon"><i class="far fa-envelope"></i></div>
-            <div class="label">Newsletter</div>
-        </a>
-    </li> 
-
-    
-</ul>
+<ul class="coco-admin-nav-area">{ADMINMENU}</ul>
 </div>
 
 <div class="coco-dashboard">
@@ -61,7 +14,9 @@
         <div class="greeting">{GREETING} <b>{NAME}</b></div>
         <button class="dashboard-logout" title="Abmelden"><i class="fas fa-sign-out-alt"></i></button>
     </header>
+    {BREADCRUMBS}
 </div>
+
 </div>
 
 
