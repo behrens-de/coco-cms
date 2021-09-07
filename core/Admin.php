@@ -55,7 +55,6 @@ class Admin
     {
 
         $page = new Page();
-
         $cssURI = $page->domain . '/public/admin/src/style.css';
         return '
         <!DOCTYPE html>
@@ -89,6 +88,7 @@ class Admin
             $contnet = str_replace("{ADMINMENU}", Admin::adminMenu(), $contnet);
             $contnet = str_replace("{BREADCRUMBS}", Admin::breadcrumbs(), $contnet);
             $contnet = str_replace("{TEMPLATES}", Templates::list(), $contnet);
+            $contnet = str_replace("{TEMPLATEPAGES}", Templates::pages(), $contnet);
         } else {
             $contnet = "Diese Seite ist nicht verfügbar";
         }
@@ -100,6 +100,7 @@ class Admin
 
     static function greeting()
     {
+        
         $Hour = date('H');
 
         if ($Hour >= 5 && $Hour <= 11) {
@@ -111,7 +112,7 @@ class Admin
         } else {
             $greeting = 'Hallo';
         }
-        return $greeting;
+        return $greeting.$Hour;
     }
 
     static function adminMenu()

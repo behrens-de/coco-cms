@@ -2,6 +2,7 @@
 // COCO CMS Copyright by JP Behrens <https://jpbehrens.de> 
 session_start();
 $SID = session_id();
+date_default_timezone_set('Europe/Berlin');
 #error_reporting(E_ERROR | E_PARSE | E_NOTICE);
 
 spl_autoload_register(function ($name) {

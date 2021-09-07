@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 ?>
 <!DOCTYPE html>
@@ -14,4 +14,9 @@
     <?php print_r(http_response_code());?>
     <a href="<?echo PREFIX; ?>">Gehe zur Startseite</a>
 </body>
-</html>
+</html> -->
+
+
+<h1>HALLO ICH BIN EINE COCO ONE ERRORSEITE</h1>
+<p>und ich sehe Total anders aus</p>
+<?php print_r(http_response_code());?>
