@@ -88,6 +88,7 @@ class Admin
             $contnet = str_replace("{GREETING}", Admin::greeting(), $contnet);
             $contnet = str_replace("{ADMINMENU}", Admin::adminMenu(), $contnet);
             $contnet = str_replace("{BREADCRUMBS}", Admin::breadcrumbs(), $contnet);
+            $contnet = str_replace("{TEMPLATES}", Templates::list(), $contnet);
         } else {
             $contnet = "Diese Seite ist nicht verfügbar";
         }

@@ -95,6 +95,17 @@ if ($adminUri === 'firstrun') {
     die();
 }
 
+if ($adminUri === 'set-new-template') {
+    $_POST = json_decode(file_get_contents('php://input'), true);
+
+    Templates::setname($_POST["name"]);
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($_POST);
+
+    die();
+}
+
 
 // Wenn firstrun noch nicht ausgeführt wurde
 if (!$admin::checkFirstRun($settingFile)) {
@@ -130,8 +141,8 @@ $adminpages = array(
     "menus"  => "dashboard-menus.html",
     "settings" => "dashboard-settings.html",
     "templates" => "dashboard-templates.html",
-    "data" => "dashboard-data.html",
-    "user" => "dashboard-user.html",
+    "files" => "dashboard-data.html",
+    "users" => "dashboard-user.html",
     "newsletter" => "dashboard-newsletter.html"
 );
 
@@ -143,13 +154,19 @@ if($adminpagecount > 2){
         echo 'Keinen zugrif auf diese Seite';
     }
 
+
+
+
+    
 } else{
     echo Admin::html_render(__DIR__ . '/parts/dashboard.html', 'Admin Area');
-
 }
 // var_dump($adminpage, $adminpagecount);
 
 //var_dump($_SESSION["admin"]);
+
+
+// The regex here is the word 'go'.
 
 
 // 

@@ -1,16 +1,9 @@
 <div class="coco-admin-page">
-
-
     <div class="coco-admin-nav">
-        <div class="coco-admin-nav-logo">
-            coco cms
-        </div>
-    
-    <ul class="coco-admin-nav-area">
-        {ADMINMENU}
-    </ul>
+        <div class="coco-admin-nav-logo">coco cms</div>
+        <ul class="coco-admin-nav-area">{ADMINMENU}</ul>
     </div>
-    
+
     <div class="coco-dashboard">
         <header class="dashboard-header">
             <div class="greeting">{GREETING} <b>{NAME}</b></div>
@@ -18,29 +11,55 @@
         </header>
 
         {BREADCRUMBS}
+        {TEMPLATES}
     </div>
-    </div>
-    
-    
-    <script>
-        const button = document.querySelector('button');
-        button.addEventListener('click', logout);
-    
-        function logout(e) {
-            e.preventDefault();
-    
-            fetch('http://localhost:3333/public/admin/logout', {
-    
+</div>
+
+
+<script>
+    swapTemplate();
+
+    function swapTemplate() {
+        const span = document.querySelectorAll("span");
+
+        span.forEach(s => {
+            s.addEventListener('click', test);
+        });
+
+
+        function test(e) {
+            let test = this;
+
+            const spanActive = document.querySelectorAll("span.tpl-prev-active");
+
+            spanActive.forEach(sa => {
+                sa.classList.remove('tpl-prev-active');
+                sa.classList.add('tpl-prev');
+            });
+
+            this.classList.remove('tpl-prev');
+            this.classList.add('tpl-prev-active');
+            sending(test.innerText);
+        }
+
+        function sending(xname) {
+            console.log('START - SWAP TEMPLATE');
+
+            const fetchUri = 'http://localhost:3333/public/admin/set-new-template';
+
+            fetch(fetchUri, {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: {}
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: xname})
             })
-                .then(obj => { location.reload(); })
-                .catch(function (err) {
-                    console.log(err) // this won't trigger because there is no actual error
+                .then(res => res.json().then(data => ({ status: res.status, body: data })))
+                .then(obj => {
+                    console.log(obj.body);
+                }).catch(function (err) {
+                    console.log(err)
                 });
         }
-    </script>
+
+    }
+
+</script>

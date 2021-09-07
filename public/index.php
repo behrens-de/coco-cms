@@ -20,7 +20,7 @@ print $cocoheader->load();
 // TEMPLATE INFORMATION
 // TODO: Prüfen ob das gewählte template auch vorhanden ist
 define('TEMPLATE', ($cocodata->template ? $cocodata->template : 'default'));
-define('TEMPLATENAME', 'coco-one');
+define('TEMPLATENAME', Templates::name());
 define('TEMPLATE_ERROR', '404');
 define('TEMPLATE_PATH', __DIR__ . '/../template/'.TEMPLATENAME.'/');
 

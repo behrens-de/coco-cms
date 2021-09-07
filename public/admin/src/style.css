@@ -260,3 +260,26 @@ ul.admin-breadcrumb li:last-child a{
     color: #444;
    
 }
+
+
+
+/*Template*/
+
+.tpl-prev{
+    padding: 8px 16px;
+    border: 1px solid #666;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    float: left;
+}
+.tpl-prev-active{
+    padding: 8px 16px;
+    border: 1px solid #666;
+    margin: 10px;
+    background: rgba(207, 254, 205, 0.5);
+    float: left;
+}
+.tpl-prev-active::after{
+    content: " (active) ";
+    opacity: .3;
+}
